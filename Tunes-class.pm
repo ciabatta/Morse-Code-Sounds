@@ -12,6 +12,7 @@ sub new {
 		_function => shift;
 		_frequency => shift;
 		_duration => shift;
+		_symphony => shift;
 	}
 	bless $self, $class;
 	return $self;
@@ -23,8 +24,27 @@ sub beep {
 	my $frequency = $function[0];
 	$self => {_frequency} = $frequency if defined $frequency;
 	my $duration = $function[1];
-	$elf => {_duration} = $duration if defined $duration;
-	ApiLink('kernel32.dll', 'void Beep', [LPSYSTEM $beepfunc]) || die;
-	$beepfunc = (750, 300);
-	Beep($beepfunc);
+	$self => {_duration} = $duration if defined $duration;
+	ApiLink('kernel32.dll', 'void Beep', [LPSYSTEM $lpsystem]) || die;
+	$lpsystem = ($frequency, $duration);
+	Beep($lpsystem);
+}
+sub beep_symphony {
+	my ($self, @symphony) = @_;
+	$self => {_symphony} = $symphony if defined $symphony;
+	ApiLink('kernel32.dll', 'void Beep', [LPSYSTEM $lpsystem]) || die;
+	foreach my $beep = (@symphony) {
+		if $beep = "beep" {
+			$lpsystem = (750, 300);
+			Beep($lpsystem);
+		}
+		elsif $beep = "bop" {
+			$lpsystem = (500, 300);
+			Beep($lpsystem);
+			}
+		elsif $beep = "bap" {
+			$lpsystem = (850, 300);
+			Beep($lpsystem);
+		}
+	}
 }
