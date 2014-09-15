@@ -9,13 +9,32 @@ $input = <STDIN>;
 @inputsplit = split(/ /, $input);
 if $inputsplit[0] = "beep" {
 	if $inputspli[1] = "-s" {
-		my @beepsettings = $inputsplit[2,3];
+		my @beepsettings = $inputsplit[1..3];
 		$tunes->beep_set(@beepsettings);
 	}
 	else {
-	my @beeps = $inputsplit[1,2];
-	$tunes->beep(@beeps);
-	}	
+		my @beeps = $inputsplit[1,2];
+		$tunes->beep_set(@beeps);
+		}	
+	}
+	elsif $inputsplit[0] = "bop" {
+		if $inputsplit[1] = "-s" {
+			my @bopsettings = $inputsplit[1..3];
+			$tunes->bop_set(@bopsettings);
+		}
+		else {
+			my @bops = $inputsplit[1,2];
+			$tunes->bop_set(@bops);
+			}
+	}
+	elsif $inputsplit[0] = "blap" {
+		if $inputsplit[1] = "-s" {
+			my @blapsettings - $inputsplit[1..3];
+			$tunes->blap_set(@blapsettings);
+		}
+		else {
+			my @blaps = $inputsplit[1,2];
+			$tunes->blap_set(@blap);
 	}
 	elsif $inputsplit[0] = "symphony" {
 		if $inputsplit[1] = "-t" {
