@@ -8,8 +8,15 @@ print "Please enter a tune!";
 $input = <STDIN>;
 @inputsplit = split(/ /, $input);
 if $inputsplit[0] = "beep" {
-	@beeps = $inputsplit[1,2];
+	if $inputspli[1] = "-s" {
+		my @beepsettings = $inputsplit[2,3];
+		$tunes->beep_set(@beepsettings);
+	}
+	else {
+	my @beeps = $inputsplit[1,2];
 	$tunes->beep(@beeps);
+	}	
+	}
 	elsif $inputsplit[0] = "symphony" {
 		if $inputsplit[1] = "-t" {
 			my $dir = dir($inputsplit[2]);
@@ -44,5 +51,5 @@ if $inputsplit[0] = "beep" {
 		print "symphony\n";
 	}
 	else print "Not a valid command. Type Help for more information.";
-}
+
 $tunes->beep(@inputsplit); 
