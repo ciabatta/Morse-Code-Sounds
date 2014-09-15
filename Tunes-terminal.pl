@@ -8,7 +8,7 @@ print "Please enter a tune!";
 $input = <STDIN>;
 @inputsplit = split(/ /, $input);
 if $inputsplit[0] = "beep" {
-	@beeps = split(/ /, $inputsplit[1,2]);
+	@beeps = $inputsplit[1,2];
 	$tunes->beep(@beeps);
 	elsif $inputsplit[0] = "symphony" {
 		if $inputsplit[1] = "-t" {

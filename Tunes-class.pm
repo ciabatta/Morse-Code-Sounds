@@ -33,7 +33,9 @@ sub beep_symphony {
 	my ($self, @symphony) = @_;
 	$self => {_symphony} = $symphony if defined $symphony;
 	ApiLink('kernel32.dll', 'void Beep', [LPSYSTEM $lpsystem]) || die;
-	foreach my $beep = (@symphony) {
+	my @validbeeps = ("beep", "bop", "blap");
+	my @symphonygrepped = grep{/$validbeeps$/} @symphony;
+	foreach my $beep = (@symphonygrepped) {
 		if $beep = "beep" {
 			$lpsystem = (750, 300);
 			Beep($lpsystem);
@@ -42,7 +44,7 @@ sub beep_symphony {
 			$lpsystem = (500, 300);
 			Beep($lpsystem);
 			}
-		elsif $beep = "bap" {
+		elsif $beep = "blap" {
 			$lpsystem = (850, 300);
 			Beep($lpsystem);
 		}
