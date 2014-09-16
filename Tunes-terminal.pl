@@ -7,8 +7,8 @@ $tunes = Tunes::class->new();
 print "Please enter a tune!";
 $input = <STDIN>;
 @inputsplit = split(/ /, $input);
-if $inputsplit[0] = "beep" {
-	if $inputspli[1] = "-s" {
+if ($inputsplit[0] = "beep") {
+	if ($inputspli[1] = "-s") {
 		my @beepsettings = $inputsplit[1..3];
 		$tunes->beep_set(@beepsettings);
 	}
@@ -17,8 +17,8 @@ if $inputsplit[0] = "beep" {
 		$tunes->beep_set(@beeps);
 		}	
 	}
-	elsif $inputsplit[0] = "bop" {
-		if $inputsplit[1] = "-s" {
+	elsif ($inputsplit[0] = "bop") {
+		if ($inputsplit[1] = "-s") {
 			my @bopsettings = $inputsplit[1..3];
 			$tunes->bop_set(@bopsettings);
 		}
@@ -27,8 +27,8 @@ if $inputsplit[0] = "beep" {
 			$tunes->bop_set(@bops);
 			}
 	}
-	elsif $inputsplit[0] = "blap" {
-		if $inputsplit[1] = "-s" {
+	elsif ($inputsplit[0] = "blap") {
+		if ($inputsplit[1] = "-s") {
 			my @blapsettings - $inputsplit[1..3];
 			$tunes->blap_set(@blapsettings);
 		}
@@ -36,8 +36,8 @@ if $inputsplit[0] = "beep" {
 			my @blaps = $inputsplit[1,2];
 			$tunes->blap_set(@blap);
 	}
-	elsif $inputsplit[0] = "symphony" {
-		if $inputsplit[1] = "-t" {
+	elsif ($inputsplit[0] = "symphony") {
+		if ($inputsplit[1] = "-t") {
 			my $dir = dir($inputsplit[2]);
 			my $file = $dir->file($inputsplit[3]);
 			my $file_handle = $file->openr();
@@ -46,16 +46,16 @@ if $inputsplit[0] = "beep" {
 			close $file_handle;
 			$tunes->beep_symphony(@lines);
 		}
-			elsif $inputsplit[1] = "-i" {
+			elsif ($inputsplit[1] = "-i") {
 				my @inlinebeeps = $inputsplit[2..];
 				$tunes->beep_symphony(@inlinebeeps);
 			}
 	}
-	elsif $inputsplit[0] = ("Help", "help", "HELP") {
-		if $inputspli[1] = "beep" {
+	elsif ($inputsplit[0] = ("Help", "help", "HELP")) {
+		if ($inputspli[1] = "beep") {
 			print "Usage: beep [frequency] [duration]\n";
 		}
-			elsif $inputsplit[1] = "symphony" {
+			elsif ($inputsplit[1] = "symphony") {
 				print "Usage: symphony [-t] [-i] arguments\n";
 				print "-t Usage: Arguments should be a file path and the name of a file.\n";
 				print "Seperate the file name from the filepath by a space.\n";
@@ -69,6 +69,6 @@ if $inputsplit[0] = "beep" {
 		print "beep\n";
 		print "symphony\n";
 	}
-	else print "Not a valid command. Type Help for more information.";
-
-$tunes->beep(@inputsplit); 
+	else {
+		print "Not a valid command. Type Help for more information.";
+		}
