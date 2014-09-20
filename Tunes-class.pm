@@ -9,6 +9,7 @@ use Win32::API::Prototype;
 sub new {
 	my $class = shift;
 	my $self = {
+		_favefile => shift;
 		_function => shift;
 		_frequency => shift;
 		_duration => shift;
@@ -22,6 +23,15 @@ sub new {
 	}
 	bless $self, $class;
 	return $self;
+}
+
+sub save_setttings {
+	my ($self, $savefile) = @_;
+	my $self => {_savefile} = $savefile if defined $savefile;
+	my %settings = {
+		'beepfreqeuncy' => $self=>{_beepfrequency},
+		
+	}
 }
 
 sub beep_set {
