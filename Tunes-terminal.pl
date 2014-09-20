@@ -69,6 +69,14 @@ if ($inputsplit[0] = "beep") {
 		print "beep\n";
 		print "symphony\n";
 	}
+	elsif ($inputsplit[0] = ("save", "Save", "SAVE")) {
+		my @savedata = ($inputsplit[1], $inputsplit[2]);
+		$tunes->save_settings(@savedata);
+	}
+	elsif ($inputsplit[0] = ("import", "Import", "IMPORT")) {
+		@importdata = ($inputsplit[0], $inputsplit[1]);
+		$tunes->import_settings(@importdata);
+	}
 	else {
 		print "Not a valid command. Type Help for more information.";
 		}

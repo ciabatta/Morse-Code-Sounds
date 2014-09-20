@@ -3,13 +3,14 @@ package Tunes::class
 #!usr/bin/perl
 use strict;
 use warnings;
+use File::Slurp;
 use Win32::API;
 use Win32::API::Prototype;
 
 sub new {
 	my $class = shift;
 	my $self = {
-		_favefile => shift;
+		_savefile => shift;
 		_function => shift;
 		_frequency => shift;
 		_duration => shift;
@@ -25,13 +26,42 @@ sub new {
 	return $self;
 }
 
-sub save_setttings {
+sub save_settings {
 	my ($self, $savefile) = @_;
-	my $self => {_savefile} = $savefile if defined $savefile;
-	my %settings = {
-		'beepfreqeuncy' => $self=>{_beepfrequency},
-		
+	$self => {_savefile} = $savefile if defined $savefile;
+	my %savedata = {
+		"beepf" => $self=>{_beepfrequency},
+		"beepd" => $self=>{_beepduration},
+		"bopf" => $self=>{_bopfrequency},
+		"bopd" => $self=>{_bopduration},
+		"blapf" => $self=>{_bladfrequency},
+		"blapd" => $self=>{_blapduration},
 	}
+	my $directory = file($savefile[0]);
+	my $file = $directory->file($savefile[1]);
+	my $filehandle = $file->openw();
+	my @printlist = %savedata;
+	foreach my $lines (@printlist) {
+		$filehandle->print($lines."\n");
+	} 
+}	
+sub import_settings {
+	my ($self, $importfile) = @_;
+	$self => {_importfile} = $importfile if defined $importfile;
+	my $directory = dir($importfile[0]);
+	my $file = $directory->file($importfile[1]);
+	my $filehandle = $file->openr();
+	while( my $lines=$filehandle->get_line()) {
+		my @importdata = chomp($lines);
+	}
+	my %importhash = @importdata;
+	my $self=>{_beepfrequency} = $importhash->{beepf};
+	my $self=>{_beepduration} = $importhash->{beepd};
+	my $self=>{_bopfrequency} = $importhash->{bopf};
+	my $self=>{_bopduration} = $importhash->{bopd};
+	my $self=>{_blapfrequency} = $importhash->{blapf};
+	my $self=>{_blapduration} = $importhash->{blapd};
+	
 }
 
 sub beep_set {
